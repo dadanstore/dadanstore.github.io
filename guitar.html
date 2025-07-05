@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dadan Store - Toko Guitar Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gold: #f1c40f;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #1a252f);
+            color: white;
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo i {
+            color: var(--gold);
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            display: none; /* Hidden by default on mobile */
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+        
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .hero-content {
+            padding: 0 5%;
+            max-width: 800px;
+        }
+        
+        .hero-content h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .hero-content p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin: 0 auto 2rem;
+            animation: slideUp 1s ease-out;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--dark);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Guitar Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(0);
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .category-card:nth-child(1) { animation-delay: 0.2s; }
+        .category-card:nth-child(2) { animation-delay: 0.4s; }
+        .category-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .category-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-all {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .view-all:hover {
+            color: white;
+        }
+        
+        .category-content {
+            padding: 1.2rem;
+        }
+        
+        .guitar-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .guitar-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .guitar-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .guitar-img-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 500px;
+        }
+        
+        .guitar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .guitar-img:hover {
+            transform: scale(1.1);
+        }
+        
+        .guitar-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.8rem;
+        }
+        
+        .guitar-name {
+            font-weight: 600;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            margin-bottom: 0.3rem;
+        }
+        
+        .guitar-price {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #1a252f;
+            transform: translateY(-2px);
+        }
+        
+        .add-to-cart i {
+            font-size: 0.8rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            margin-top: 4rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+        
+        .footer-col ul li i {
+            margin-right: 8px;
+            width: 20px;
+            color: var(--gold);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--gold);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            animation: modalOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes modalOpen {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 1.2rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #eee;
+            gap: 1rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .cart-item-img-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .cart-item-img:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            background-color: #f1f1f1;
+            border: none;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #ddd;
+        }
+        
+        .quantity {
+            margin: 0 5px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .remove-item {
+            color: #e74c3c;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        
+        .remove-item:hover {
+            transform: scale(1.2);
+        }
+        
+        .modal-footer {
+            padding: 1.2rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        
+        .total-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .checkout-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkout-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+        }
+        
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: white;
+            z-index: 3000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: left 0.3s ease-in-out;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            left: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mobile-nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .mobile-nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+            backdrop-filter: blur(3px);
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links a {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+                margin-right: 1rem;
+            }
+            
+            .hero {
+                height: 50vh;
+                min-height: 300px;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+            }
+            
+            .cart-item-img-container {
+                width: 100%;
+                height: 150px;
+                margin-bottom: 1rem;
+            }
+            
+            .cart-item-actions {
+                margin-top: 1rem;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="#" class="logo">
+                <i class="fas fa-guitar"></i>
+                <span>Dadan Store</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#">Beranda</a>
+                <a href="#">Produk</a>
+                <a href="#">Tentang Kami</a>
+                <a href="#">Kontak</a>
+            </nav>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <i class="fas fa-guitar"></i>
+                <span>Dadan Store</span>
+            </div>
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#">Produk</a></li>
+            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="#">Kontak</a></li>
+            <li><a href="#">Promo</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Koleksi Guitar Premium</h1>
+            <p>Temukan Guitar impian Anda dengan kualitas terbaik dan harga kompetitif. Berbagai merek ternama tersedia untuk memenuhi kebutuhan musisi profesional maupun pemula.</p>
+            <a href="#" class="btn">Jelajahi Koleksi</a>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="section-title">
+            <h2>Koleksi Guitar Kami</h2>
+        </div>
+        
+        <div class="categories">
+            <!-- Guitar Akustik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar R.HALL</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="assets/foto-gitar/(19) RG41CE BL (M).jpg" alt="Yamaha C40" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Yamaha C40</div>
+                                <div class="guitar-price">Rp 3.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="assets/foto-gitar/RHOLE.jpg" alt="Fender CD-60S" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender CD-60S</div>
+                                <div class="guitar-price">Rp 4.200.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="assets/foto-gitar/RHOLE2.jpg" alt="Taylor 214CE" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Taylor 214CE</div>
+                                <div class="guitar-price">Rp 15.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar IMB</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="assets/foto-gitar/(1) IM1DE-NAT(GM) Amara.jpg" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="assets/foto-gitar/(1) IM1DE-SB(GM) Amara.jpg" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="assets/foto-gitar/(2) IM1DE-NAT(GM) Merbau.jpg" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar AVALONE</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar EVORA</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar PMS-KG</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar CULTURE</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar DAME</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar GREMLIN</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar JASMINE</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar MEKSTORE MUSIC</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar MUDIS</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar OSCARSCHMIDT</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar TFLYMUSIC</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guitar Elektrik -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar WASBURN</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="" alt="Fender Stratocaster" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Stratocaster</div>
+                                <div class="guitar-price">Rp 18.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Gibson Les Paul" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Gibson Les Paul</div>
+                                <div class="guitar-price">Rp 25.000.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez RG550" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez RG550</div>
+                                <div class="guitar-price">Rp 12.750.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Guitar Bass -->
+            <div class="category-card">
+                <div class="category-header">
+                    <span>Guitar DISPLAY</span>
+                    <a href="#" class="view-all">Lihat Semua</a>
+                </div>
+                <div class="category-content">
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fender Jazz Bass" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Fender Jazz Bass</div>
+                                <div class="guitar-price">Rp 16.800.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Music Man StingRay" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Music Man StingRay</div>
+                                <div class="guitar-price">Rp 22.500.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="guitar-item">
+                        <div class="guitar-img-container">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Ibanez SR500" class="guitar-img">
+                        </div>
+                        <div class="guitar-info">
+                            <div>
+                                <div class="guitar-name">Ibanez SR500</div>
+                                <div class="guitar-price">Rp 11.300.000</div>
+                            </div>
+                            <button class="add-to-cart">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Dadan Store</h3>
+                <p>Toko Guitar premium dengan koleksi terlengkap dan harga terbaik. Kami berkomitmen memberikan pengalaman berbelanja terbaik untuk musisi Indonesia.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Produk</h3>
+                <ul>
+                    <li><a href="#">Guitar Akustik</a></li>
+                    <li><a href="#">Guitar Elektrik</a></li>
+                    <li><a href="#">Guitar Bass</a></li>
+                    <li><a href="#">Aksesoris Guitar</a></li>
+                    <li><a href="#">Amplifier</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Bantuan</h3>
+                <ul>
+                    <li><a href="#">Panduan Belanja</a></li>
+                    <li><a href="#">Pembayaran</a></li>
+                    <li><a href="#">Pengiriman</a></li>
+                    <li><a href="#">Garansi</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Kontak Kami</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jl. Musik No. 123, Jakarta</li>
+                    <li><i class="fas fa-phone"></i> (021) 1234-5678</li>
+                    <li><i class="fas fa-envelope"></i> info@dadanstore.com</li>
+                    <li><i class="fas fa-clock"></i> Buka Setiap Hari 09:00 - 21:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Dadan Store. All Rights Reserved.
+        </div>
+    </footer>
+    
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Keranjang Belanja</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="cartBody">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Keranjang belanja Anda kosong</p>
+                </div>
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="modal-footer" id="cartFooter" style="display: none;">
+                <div class="total-price">Total: Rp <span id="cartTotal">0</span></div>
+                <button class="checkout-btn">
+                    <i class="fas fa-credit-card"></i> Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenu = document.getElementById('closeMenu');
+            const overlay = document.getElementById('overlay');
+            
+            hamburger.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeMenu.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            overlay.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Cart Functionality
+            const cartIcon = document.getElementById('cartIcon');
+            const cartModal = document.getElementById('cartModal');
+            const closeModal = document.getElementById('closeModal');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            const cartBody = document.getElementById('cartBody');
+            const cartFooter = document.getElementById('cartFooter');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            let cartItems = [];
+            let totalItems = 0;
+            
+            // Sample product data
+            const products = {
+                'Yamaha C40': { price: 3500000, image: 'https://images.unsplash.com/photo-1550985616-1081020a975c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Fender CD-60S': { price: 4200000, image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Taylor 214CE': { price: 15000000, image: 'https://images.unsplash.com/photo-1519683109079-d5f539e1542f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Fender Stratocaster': { price: 18500000, image: '' },
+                'Gibson Les Paul': { price: 25000000, image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Ibanez RG550': { price: 12750000, image: 'https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Fender Jazz Bass': { price: 16800000, image: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Music Man StingRay': { price: 22500000, image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' },
+                'Ibanez SR500': { price: 11300000, image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80' }
+            };
+            
+            // Open modal when cart icon is clicked
+            cartIcon.addEventListener('click', function() {
+                cartModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modal when X is clicked
+            closeModal.addEventListener('click', function() {
+                cartModal.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === cartModal) {
+                    cartModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Add to cart functionality
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const guitarItem = this.closest('.guitar-item');
+                    const guitarName = guitarItem.querySelector('.guitar-name').textContent;
+                    const guitarPrice = parseInt(guitarItem.querySelector('.guitar-price').textContent.replace(/\D/g, ''));
+                    
+                    // Check if item already in cart
+                    const existingItem = cartItems.find(item => item.name === guitarName);
+                    
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        cartItems.push({
+                            name: guitarName,
+                            price: guitarPrice,
+                            quantity: 1,
+                            image: products[guitarName].image
+                        });
+                    }
+                    
+                    totalItems++;
+                    updateCart();
+                    
+                    // Show feedback
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check"></i> Ditambahkan';
+                    button.style.backgroundColor = '#2ecc71';
+                    
+                    // Add pulse animation to cart icon
+                    cartIcon.style.animation = 'pulse 0.5s';
+                    setTimeout(() => {
+                        cartIcon.style.animation = '';
+                    }, 500);
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.style.backgroundColor = '';
+                    }, 2000);
+                });
+            });
+            
+            // Update cart display
+            function updateCart() {
+                cartCount.textContent = totalItems;
+                
+                if (cartItems.length > 0) {
+                    cartBody.innerHTML = '';
+                    cartFooter.style.display = 'flex';
+                    
+                    let totalPrice = 0;
+                    
+                    cartItems.forEach(item => {
+                        totalPrice += item.price * item.quantity;
+                        
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.className = 'cart-item';
+                        cartItemElement.innerHTML = `
+                            <div class="cart-item-img-container">
+                                <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                            </div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="cart-item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <div class="quantity-control">
+                                    <button class="quantity-btn minus">-</button>
+                                    <span class="quantity">${item.quantity}</span>
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="remove-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        `;
+                        
+                        cartBody.appendChild(cartItemElement);
+                        
+                        // Add event listeners to the new elements
+                        const minusBtn = cartItemElement.querySelector('.minus');
+                        const plusBtn = cartItemElement.querySelector('.plus');
+                        const removeBtn = cartItemElement.querySelector('.remove-item');
+                        const quantityElement = cartItemElement.querySelector('.quantity');
+                        
+                        minusBtn.addEventListener('click', function() {
+                            if (item.quantity > 1) {
+                                item.quantity--;
+                                totalItems--;
+                                quantityElement.textContent = item.quantity;
+                                updateCart();
+                            }
+                        });
+                        
+                        plusBtn.addEventListener('click', function() {
+                            item.quantity++;
+                            totalItems++;
+                            quantityElement.textContent = item.quantity;
+                            updateCart();
+                        });
+                        
+                        removeBtn.addEventListener('click', function() {
+                            totalItems -= item.quantity;
+                            cartItems = cartItems.filter(cartItem => cartItem.name !== item.name);
+                            updateCart();
+                        });
+                    });
+                    
+                    cartTotal.textContent = totalPrice.toLocaleString('id-ID');
+                } else {
+                    cartBody.innerHTML = `
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p>Keranjang belanja Anda kosong</p>
+                        </div>
+                    `;
+                    cartFooter.style.display = 'none';
+                }
+            }
+            
+            // Checkout button
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            checkoutBtn.addEventListener('click', function() {
+                alert('Terima kasih! Pesanan Anda akan segera diproses.');
+                cartItems = [];
+                totalItems = 0;
+                updateCart();
+                cartModal.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
